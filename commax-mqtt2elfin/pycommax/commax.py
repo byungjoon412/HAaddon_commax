@@ -463,14 +463,23 @@ def do_work(config, device_list):
                         elfin_id = config['elfin_id']
                         elfin_password = config['elfin_password']
                         elfin_server = config['elfin_server']
+                        elfin_port = config['elfin_port']
 
-                        ew11 = telnetlib.Telnet(elfin_server)
+                        with Telnet(elfin_server, elfin_port) as tn:
+                            tn.read_until(b"login:")
+                            tn.write(elfin_id.encode('ascii') + b'\n')
+                            tn.read_until(b"password:")
+                            tn.write(elfin_password.encode('ascii') + b'\n')
+                            tn.write(b'Restart\n')
+                            #tn.read_until(b'Restart..')
 
-                        ew11.read_until(b"login:")
-                        ew11.write(elfin_id.encode('utf-8') + b'\n')
-                        ew11.read_until(b"password:")
-                        ew11.write(elfin_password.encode('utf-8') + b'\n')
-                        ew11.write('Restart'.encode('utf-8') + b'\n')
+                        #ew11 = telnetlib.Telnet(elfin_server)
+
+                        #ew11.read_until(b"login:")
+                        #ew11.write(elfin_id.encode('utf-8') + b'\n')
+                        #ew11.read_until(b"password:")
+                        #ew11.write(elfin_password.encode('utf-8') + b'\n')
+                        #ew11.write('Restart'.encode('utf-8') + b'\n')
 
                         await asyncio.sleep(10)
                     except:
