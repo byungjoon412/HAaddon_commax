@@ -19,6 +19,7 @@
     "mqtt_id": "id",
     "mqtt_password": "password",
     "elfin_server": "192.168.x.x",
+    "elfin_port": 23,
     "elfin_id": "admin",
     "elfin_password": "elfin_password"
   },
@@ -31,6 +32,7 @@
     "mqtt_id": "str",
     "mqtt_password": "str",
     "elfin_server": "str",
+    "elfin_port": "int",
     "elfin_id": "str",
     "elfin_password": "str"
   }
